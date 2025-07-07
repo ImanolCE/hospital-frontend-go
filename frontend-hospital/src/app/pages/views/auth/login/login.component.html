@@ -1,0 +1,27 @@
+<div class="auth-container">
+  <h2>Iniciar Sesión</h2>
+  <div class="p-fluid">
+    <div class="p-field">
+      <label for="username">Usuario</label>
+      <input id="username" type="text" pInputText [(ngModel)]="username" />
+    </div>
+    <div class="p-field">
+      <label for="password">Contraseña</label>
+      <input id="password" type="password" pInputText [(ngModel)]="password" />
+    </div>
+    <div class="button-container">
+      <button
+        pButton
+        label="Iniciar Sesión"
+        [disabled]="!username || !password"
+        (click)="onLogin()"
+      ></button>
+      <button
+        pButton
+        label="Registrarse"
+        class="p-button-secondary"
+        routerLink="/auth/register"
+      ></button>
+    </div>
+  </div>
+</div>
