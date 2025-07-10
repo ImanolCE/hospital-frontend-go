@@ -6,6 +6,10 @@
       <input id="username" type="text" pInputText [(ngModel)]="username" />
     </div>
     <div class="p-field">
+      <label for="apellido">Apellido</label>
+      <input id="apellido" type="text" pInputText [(ngModel)]="apellido" />
+    </div>
+    <div class="p-field">
       <label for="email">Correo</label>
       <input id="email" type="email" pInputText [(ngModel)]="email" />
     </div>
@@ -21,13 +25,16 @@
       <button
         pButton
         label="Registrar"
+        severity="info"
+        [rounded]="true"
         [disabled]="!username || !email || !password || !confirmPassword"
         (click)="onRegister()"
       ></button>
       <button
         pButton
         label="Volver a Login"
-        class="p-button-secondary"
+        severity="info"
+        [rounded]="true"
         routerLink="/auth/login"
       ></button>
     </div>

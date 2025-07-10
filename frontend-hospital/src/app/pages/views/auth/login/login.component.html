@@ -13,15 +13,20 @@
       <button
         pButton
         label="Iniciar Sesión"
+        severity="info"
+        [rounded]="true"
         [disabled]="!username || !password"
         (click)="onLogin()"
       ></button>
+
       <button
-        pButton
+        pButton 
         label="Registrarse"
-        class="p-button-secondary"
+        severity="info"
+        [rounded]="true"
         routerLink="/auth/register"
       ></button>
+
     </div>
   </div>
 </div>

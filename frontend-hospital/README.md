@@ -1,59 +1,140 @@
-# FrontendHospital
+# hospital-frontend-go
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.15.
+Esta es la parte del proyecto frontend del Sistema de Citas y Reportes, que se desarrolla con Angular 19 y PrimeNG. 
 
-## Development server
+Actualmente se implementan las vistas de:
 
-To start a local development server, run:
+- Login  
+- Registro  
 
-```bash
-ng serve
-```
+Solo se han desarrollan los componentes visuales, sin conexión al backend en esta etapa.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+---
 
-## Code scaffolding
+## Tecnologías Utilizadas
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+- **Angular 19**
+- **PrimeNG**
+- **CSS**
 
-```bash
-ng generate component component-name
-```
+---
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+##  Instrucciones de Instalación y Ejecución
 
-```bash
-ng generate --help
-```
+### Requisitos:
 
-## Building
-
-To build the project run:
+- Tener instalado Node.js versión 20.x o superior.
+- Tener configurado Angular CLI versión 19:
 
 ```bash
-ng build
+
+npm install -g @angular/cli@19
+
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+## Pasos para ejecutar el proyecto 
 
-## Running unit tests
+Clonar el repositorio 
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+- git clone https://github.com/ImanolCE/hospital-frontend-go.git
 
-```bash
-ng test
+Accdeder a las carpetas 
+
+- cd hospital-frontend-go
+- cd frontend-hospital
+
+Para instalar dependencias e ejecutar el proyecto 
+
+- npm install
+- ng serve
+
+---
+
+## Notas 
+
+L os formularios de Login y Registro usan PrimeNG para los estilos y componentes. Ademas  el sistema de rutas permite navegar entre Login y Registro.
+
+No se incluye lógica de conexión al backend para esta primera entrega.
+
+## Estructura de archivos actual 
+
 ```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
+└── 📁frontend-hospital
+    └── 📁.angular
+        └── 📁cache
+            └── 📁19.2.15
+                └── 📁frontend-hospital
+                    └── 📁vite
+                        └── 📁deps
+                            ├── _metadata.json
+                            ├── @angular_core.js
+                            ├── @angular_core.js.map
+                            ├── @angular_forms.js
+                            ├── @angular_forms.js.map
+                            ├── @angular_platform-browser.js
+                            ├── @angular_platform-browser.js.map
+                            ├── @angular_router.js
+                            ├── @angular_router.js.map
+                            ├── chunk-3TSB3RCJ.js
+                            ├── chunk-3TSB3RCJ.js.map
+                            ├── chunk-4MW2T37N.js
+                            ├── chunk-4MW2T37N.js.map
+                            ├── chunk-FR34QEIP.js
+                            ├── chunk-FR34QEIP.js.map
+                            ├── chunk-LKBYGJ3F.js
+                            ├── chunk-LKBYGJ3F.js.map
+                            ├── chunk-LNNAVXAM.js
+                            ├── chunk-LNNAVXAM.js.map
+                            ├── chunk-YEGXJTMJ.js
+                            ├── chunk-YEGXJTMJ.js.map
+                            ├── package.json
+                            ├── primeng_api.js
+                            ├── primeng_api.js.map
+                            ├── primeng_button.js
+                            ├── primeng_button.js.map
+                            ├── primeng_inputtext.js
+                            ├── primeng_inputtext.js.map
+                        └── 📁deps_ssr
+                            ├── _metadata.json
+                            ├── package.json
+                    ├── .tsbuildinfo
+    └── 📁.vscode
+        ├── extensions.json
+        ├── launch.json
+        ├── tasks.json
+    └── 📁public
+        ├── favicon.ico
+    └── 📁src
+        └── 📁app
+            └── 📁pages
+                └── 📁views
+                    └── 📁auth
+                        └── 📁login
+                            ├── login.component.css
+                            ├── login.component.html
+                            ├── login.component.ts
+                        └── 📁register
+                            ├── register.component.css
+                            ├── register.component.html
+                            ├── register.component.ts
+                    └── 📁consultas
+                    └── 📁dashboard
+            ├── app.component.html
+            ├── app.component.scss
+            ├── app.component.spec.ts
+            ├── app.component.ts
+            ├── app.config.ts
+            ├── app.routes.ts
+        ├── index.html
+        ├── main.ts
+        ├── styles.scss
+    ├── .editorconfig
+    ├── .gitignore
+    ├── angular.json
+    ├── package-lock.json
+    ├── package.json
+    ├── README.md
+    ├── tsconfig.app.json
+    ├── tsconfig.json
+    └── tsconfig.spec.json
 ```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.

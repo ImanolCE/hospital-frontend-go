@@ -2,7 +2,7 @@
   width: 320px;
   margin: 60px auto;
   padding: 2rem;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  box-shadow: rgb(92, 235, 240) 0px 4px 12px;
   border-radius: 8px;
   background-color: #fff;
 }
@@ -31,9 +31,17 @@
 .button-container {
   display: flex;
   justify-content: space-between;
+  gap: 1rem; 
   margin-top: 1.5rem;
 }
 
 button {
   min-width: 130px;
+}
+
+/* Forzar fondo blanco en los inputs de PrimeNG */
+input.p-inputtext {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  border: 1px solid #ccc !important;
 }
