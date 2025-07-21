@@ -1,0 +1,46 @@
+<div class="dashboard-container">
+  <h2 class="title">Panel de Médico</h2>
+  <div class="card-container">
+    <div class="card" *ngIf="permisos.includes('ver_consultas')">
+      <h3>Consultas</h3>
+      <p>Consulta el historial y tus próximas citas.</p>
+      <button pButton label="Ver Consultas" routerLink="/medico/consultas"></button>
+    </div>
+    <div class="card" *ngIf="permisos.includes('ver_horarios')">
+      <h3>Horarios</h3>
+      <p>Administra tus horarios de atención.</p>
+      <button pButton label="Ver Horarios" routerLink="/medico/horarios"></button>
+    </div>
+    <div class="card" *ngIf="permisos.includes('ver_consultorios')">
+      <h3>Consultorios</h3>
+      <p>Visualiza tus consultorios asignados.</p>
+      <button pButton label="Ver Consultorios" routerLink="/medico/consultorios"></button>
+    </div>
+  </div>
+</div>
+
+
+<p-card header="Panel de Médico">
+  <div class="buttons">
+    <button
+      *ngIf="permisos.includes('ver_consultas')"
+      pButton
+      label="Consultas"
+      routerLink="/medico/consultas"
+    ></button>
+
+    <button
+      *ngIf="permisos.includes('ver_recetas')"
+      pButton
+      label="Recetas"
+      routerLink="/medico/recetas"
+    ></button>
+
+    <button
+      *ngIf="permisos.includes('ver_expedientes')"
+      pButton
+      label="Expedientes"
+      routerLink="/medico/expedientes"
+    ></button>
+  </div>
+</p-card>

@@ -1,0 +1,34 @@
+<div class="p-fluid auth-container">
+  <h2>Activar Verificación en 2 pasos</h2>
+
+  <div class="p-field">
+    <label for="correo">Correo</label>
+    <input id="correo" type="email" pInputText [(ngModel)]="email" />
+  </div>
+
+  <div class="p-field">
+    <label for="otp">Código OTP</label>
+    <input id="otp" type="text" maxlength="6" pInputText [(ngModel)]="otp" />
+  </div>
+
+  <div class="button-container">
+    <button pButton label="Activar MFA" (click)="activarMFA()"></button>
+    <button pButton label="Cancelar" routerLink="/auth/login"></button>
+  </div>
+
+  
+<button pButton label="Regenerar QR" (click)="generarQR()"></button>
+
+<div *ngIf="qrUrl">
+  <p>Escanea el código QR en tu app autenticadora:</p>
+  <img  [src]="qrUrl"
+        alt="QR MFA"/>
+  <p>O ingresa este código manualmente: <strong>{{ secret }}</strong></p>
+</div>
+
+<label for="otp">Código OTP:</label>
+<input id="otp" type="text" [(ngModel)]="otp" pInputText />
+
+<button pButton label="Activar MFA" (click)="activarMFA()" [disabled]="!otp || loading"></button>
+
+</div>

@@ -1,0 +1,72 @@
+<p-card *ngIf="paso === 1" header="Recuperar acceso MFA" class="card">
+  <div class="form-field">
+    <label for="correo">Correo electrónico</label>
+    <input
+      id="correo"
+      type="email"
+      pInputText
+      [(ngModel)]="correo"
+      placeholder="usuario@ejemplo.com"
+      autocomplete="email"
+    />
+  </div>
+  <div class="form-field">
+    <label for="password">Contraseña</label>
+    <p-password
+      id="password"
+      [(ngModel)]="password"
+      placeholder="••••••••"
+      feedback="false"
+    ></p-password>
+  </div>
+  <div class="form-actions">
+    <button
+      pButton
+      label="Verificar"
+      icon="pi pi-shield"
+      [rounded]="true"
+      (click)="verificarCredenciales()"
+      [disabled]="!correo || !password || loading"
+      [loading]="loading"
+    ></button>
+    <button
+      pButton
+      label="Volver a Login"
+      severity="info"
+      [rounded]="true"
+      (click)="irAlLogin()"
+    ></button>
+  </div>
+
+</p-card>
+
+<p-card *ngIf="paso === 2" header="Configurar nueva MFA" class="card">
+  <div class="qr-container">
+     <img
+      [src]="qrImageUrl"
+      alt="Código QR para MFA"
+      class="qr-code"
+    />
+  </div>
+  <p class="secret-text">Código manual: <strong>{{ secret }}</strong></p>
+  <div class="form-field">
+    <label for="otp">Código OTP</label>
+    <input
+      id="otp"
+      type="text"
+      pInputText
+      [(ngModel)]="otp"
+      placeholder="123456"
+    />
+  </div>
+  <div class="form-actions">
+    <button
+        pButton
+        label="Activar MFA"
+        (click)="activateRecovery()"
+        [disabled]="!otp"
+    >
+    </button>
+  </div>
+  
+</p-card>

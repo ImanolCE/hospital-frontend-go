@@ -1,0 +1,37 @@
+.card {
+  width: 100%;
+  max-width: 400px;
+  margin: 2rem auto;
+}
+
+.form-field {
+  margin-bottom: 1rem;
+}
+
+.form-field label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.form-actions {
+  text-align: center;
+  margin-top: 1.5rem;
+}
+
+.qr-container {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.qr-code {
+  width: 200px;
+  height: 200px;
+  border-radius: 8px;
+}
+
+.secret-text {
+  text-align: center;
+  margin-bottom: 1rem;
+  font-family: monospace;
+}
