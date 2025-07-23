@@ -3,7 +3,8 @@ import { CommonModule } from '@angular/common';
 import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
 import { RouterModule } from '@angular/router';
-import { AuthService } from '../../../../services/auth.service';
+import { AuthService } from '../../../services/auth.service';
+//import { SharedModule } from '../../../shared.module'
 
 @Component({
   selector: 'app-medico-dashboard',

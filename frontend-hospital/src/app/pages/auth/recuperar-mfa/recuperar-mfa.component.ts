@@ -8,8 +8,9 @@ import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 import { ButtonModule } from 'primeng/button';
 
-import { AuthService } from '../../../../services/auth.service';
+import { AuthService } from '../../../services/auth.service';
 import { Router } from '@angular/router';
+//import { SharedModule } from '../../../shared.module'
 
 @Component({
   selector: 'app-recuperar-mfa',
@@ -20,7 +21,8 @@ import { Router } from '@angular/router';
     CardModule,
     InputTextModule,
     PasswordModule,
-    ButtonModule
+    ButtonModule,
+    
   ],
   templateUrl: './recuperar-mfa.component.html',
   styleUrls: ['./recuperar-mfa.component.css']

@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { tap, map, catchError } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
 
 // Interfaces para tipar las respuestas del backend
@@ -23,15 +24,30 @@ interface WrappedRes<T> {
   statusCode: number;
 }
 
+interface JwtPayload {
+  sub: string;
+  email: string;
+  tipo_usuario: string;
+  permisos: string[];
+  [key: string]: any;
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+    [x: string]: any;
   private apiUrl = 'http://localhost:3000';  
   private tokenKey = 'access_token';
   private refreshKey = 'refresh_token';
+  private _profile = new BehaviorSubject<JwtPayload | null>(null);
+ public profile$ = this._profile.asObservable();
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router) {
+      const token = this.getAccessToken();
+      if (token) this.setDecodedProfile(token);
+
+  }
 
   /** Cabeceras con JWT */
   private authHeaders(): { [header: string]: string } {
@@ -45,8 +61,25 @@ export class AuthService {
     return throwError(() => error);
   }
 
+  private setDecodedProfile(token: string): void {
+  const parts = token.split('.');
+  if (parts.length !== 3) {
+    console.error('Token JWT inválido');
+    return;
+  }
+  try {
+    const payload = JSON.parse(atob(parts[1]));
+    this._profile.next(payload);                            // emitir el profile
+    localStorage.setItem('userId', payload.user_id.toString()); // ← usa user_id, no id
+  } catch (e) {
+    console.error('Error al decodificar el token JWT', e);
+  }
+}
+
+
+
   /** LOGIN: guarda access + refresh token en localStorage */
-  login(email: string, password: string, otp: string): Observable<LoginResponse> {
+  login(user:any, email: string, password: string, otp: string): Observable<LoginResponse> {
     return this.http
       .post<WrappedRes<LoginResponse>>(
         `${this.apiUrl}/login`,
@@ -57,6 +90,7 @@ export class AuthService {
           const { access_token, refresh_token } = res.data[0];
           localStorage.setItem(this.tokenKey, access_token);
           localStorage.setItem(this.refreshKey, refresh_token);
+           this.setDecodedProfile(access_token);
         }),
         map(res => res.data[0]),
         catchError(this.handleError)
@@ -94,7 +128,8 @@ export class AuthService {
         tap(res => {
           const { access_token, refresh_token } = res.data[0];
           localStorage.setItem(this.tokenKey, access_token);
-          localStorage.setItem(this.refreshKey, refresh_token);
+          localStorage.setItem(this.refreshKey, refresh_token); 
+          this.setDecodedProfile(access_token);
         }),
         map(res => res.data[0]),
         catchError(this.handleError)
@@ -105,6 +140,7 @@ export class AuthService {
   logout(): void {
     localStorage.removeItem(this.tokenKey);
     localStorage.removeItem(this.refreshKey);
+     this._profile.next(null);
     this.router.navigate(['/auth/login']);
   }
 
@@ -128,10 +164,16 @@ export class AuthService {
   }
 
   /** Extrae ID de usuario del payload */
-  getUserId(): number | null {
-    const payload = this.getPayload();
-    return payload?.sub ?? payload?.id_usuario ?? null;
+ getUserId(): number | null {
+  try {
+    const token = localStorage.getItem('access_token');
+    if (!token) return null;
+    const payload = JSON.parse(atob(token.split('.')[1]));
+    return payload.user_id;
+  } catch (e) {
+    return null;
   }
+}
 
   /** Extrae rol de usuario del payload */
   getUserRole(): string | null {
@@ -149,6 +191,11 @@ export class AuthService {
   hasPermiso(nombre: string): boolean {
     return this.getPermisos().includes(nombre);
   }
+
+  addAuthHeader(): string {
+  return 'Bearer ' + localStorage.getItem('access_token') || '';
+}
+
 
   // ─── MFA PÚBLICO: RECOVERY ─────────────────────────────────────────────────────
 

@@ -1,0 +1,119 @@
+:host {
+  /* Paleta hospitalaria */
+  --hosp-bg:            #E0F2F1;
+  --hosp-card-bg:       #FFFFFF;
+  --hosp-header-bg:     #009688;
+  --hosp-header-text:   #FFFFFF;
+  --hosp-footer-bg:     #80CBC4;
+  --hosp-text:          #212121;
+  --hosp-primary:       #004D40;
+  --hosp-secondary:     #009688;
+  --hosp-border:        #B2DFDB;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: var(--hosp-bg);
+}
+
+/* Contenedor/card de registro */
+.auth-container {
+  background: var(--hosp-card-bg);
+  border: 1px solid var(--hosp-border);
+  border-radius: 1rem;
+  box-shadow: 0 10px 20px rgba(0,150,136,0.2);
+  width: 100%;
+  max-width: 420px;
+  padding: 2rem;
+}
+
+/* Títulos */
+.auth-container h2,
+.auth-container h3 {
+  text-align: center;
+  color: var(--hosp-text);
+  margin-bottom: 1.5rem;
+}
+
+/* Labels */
+.auth-container .p-field label {
+  font-weight: 600;
+  color: var(--hosp-text);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Inputs PrimeNG */
+:host ::ng-deep .p-inputtext,
+:host ::ng-deep .p-password .p-inputtext {
+  width: 100% !important;
+  border: 2px solid var(--hosp-border) !important;
+  border-radius: 0.625rem !important;
+  padding: 0.75rem 1rem !important;
+  background: var(--hosp-card-bg) !important;
+  color: var(--hosp-text) !important;
+}
+
+:host ::ng-deep .p-inputtext:focus,
+:host ::ng-deep .p-password .p-inputtext:focus {
+  border-color: var(--hosp-primary) !important;
+  box-shadow: 0 0 0 3px rgba(0,150,136,0.15) !important;
+  outline: none !important;
+}
+
+/* Botones */
+.button-container {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+/* Registrar (botón primario) */
+:host ::ng-deep .button-container .p-button:not(.p-button-info) {
+  background: var(--hosp-primary) !important;
+  color: var(--hosp-header-text) !important;
+  border: none !important;
+  border-radius: 0.625rem !important;
+  width: 100% !important;
+  padding: 0.75rem 0 !important;
+  box-shadow: 0 4px 12px rgba(0,150,136,0.3) !important;
+  transition: background 0.2s ease;
+}
+:host ::ng-deep .button-container .p-button:not(.p-button-info):hover:not(:disabled) {
+  background: var(--hosp-secondary) !important;
+}
+
+/* Volver a Login (botón secundario) */
+:host ::ng-deep .button-container .p-button.p-button-info {
+  background: transparent !important;
+  color: var(--hosp-secondary) !important;
+  border: 2px solid var(--hosp-secondary) !important;
+  border-radius: 0.625rem !important;
+  width: 100% !important;
+  padding: 0.75rem 0 !important;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+:host ::ng-deep .button-container .p-button.p-button-info:hover:not(:disabled) {
+  background: var(--hosp-secondary) !important;
+  color: var(--hosp-header-text) !important;
+}
+
+/* QR y código manual */
+.auth-container img {
+  display: block;
+  margin: 0 auto 1rem;
+  max-width: 200px;
+}
+.auth-container .otpauth {
+  display: block;
+  background: var(--hosp-card-bg);
+  border: 1px solid var(--hosp-border);
+  border-radius: 0.625rem;
+  padding: 0.75rem;
+  color: var(--hosp-text);
+  word-break: break-all;
+  margin-bottom: 1rem;
+}

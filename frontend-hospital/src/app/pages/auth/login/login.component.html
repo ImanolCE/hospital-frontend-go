@@ -1,0 +1,127 @@
+<div class="login-container">
+  <p-toast></p-toast>
+  
+  <div class="login-wrapper">
+    <p-card class="login-card">
+      <ng-template pTemplate="header">
+        <div class="card-header">
+          <img [src]="logo" alt="Logo Hospital" class="brand-logo" />
+            <h2 class="p-mt-2">Bienvenido</h2>
+            <p class="p-text-secondary">Inicia sesión con tu cuenta</p>
+        </div>
+      </ng-template>
+
+      <ng-template pTemplate="content">
+        <form class="login-form" (ngSubmit)="onLogin()">
+          
+          <!-- Email Field -->
+          <div class="form-field">
+            <label for="email" class="field-label">
+              <i class="pi pi-envelope"></i>
+              Correo Electrónico
+            </label>
+            <input 
+              id="email" 
+              type="email" 
+              pInputText 
+              [(ngModel)]="email" 
+              name="email"
+              placeholder="usuario@gmail.com"
+              autocomplete="email"
+              class="w-full"
+              [disabled]="loading"
+            />
+          </div>
+
+          <!-- Password Field -->
+          <div class="form-field">
+            <label for="password" class="field-label">
+              <i class="pi pi-lock"></i>
+              Contraseña
+            </label>
+            <p-password 
+              id="password"
+              [(ngModel)]="password"
+              name="password"
+              placeholder="Ingrese su contraseña"
+              [toggleMask]="true"
+              [feedback]="false"
+              styleClass="w-full"
+              [disabled]="loading"
+            ></p-password>
+          </div>
+
+          <!-- OTP Field -->
+          <div class="form-field">
+            <label for="otp" class="field-label">
+              <i class="pi pi-shield"></i>
+              Código de Autenticación (OTP)
+            </label>
+            <input 
+              id="otp" 
+              type="text" 
+              pInputText 
+              [(ngModel)]="otp" 
+              name="otp"
+              placeholder="000000"
+              maxlength="6"
+              class="w-full otp-input"
+              [disabled]="loading"
+            />
+          </div>
+
+          <!-- Botones lado a lado -->
+          <div class="buttons-row">
+            <div class="form-field">
+              <p-button 
+                type="submit"
+                label="Iniciar Sesión"
+                icon="pi pi-sign-in"
+                styleClass="w-full login-button"
+                [disabled]="!email || !password || !otp || loading"
+                [loading]="loading"
+              ></p-button>
+            </div>
+
+            <div class="form-field">
+              <p-button 
+                type="button"
+                label="Crear Cuenta"
+                icon="pi pi-user-plus"
+                severity="secondary"
+                styleClass="w-full register-button"
+                routerLink="/auth/register"
+                [disabled]="loading"
+              ></p-button>
+            </div>
+          </div>
+
+        </form>
+      </ng-template>
+
+      <ng-template pTemplate="footer">
+        <div class="card-footer">
+          <p class="help-text">
+            <i class="pi pi-question-circle"></i>
+            ¿Problemas con MFA? 
+          </p>
+          <div class="security-badge">
+            <a routerLink="/auth/recuperar-mfa" class="help-link">
+              Recuperar acceso
+            </a>
+          </div>
+        </div>
+      </ng-template>
+    </p-card>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" *ngIf="loading">
+      <p-progressSpinner 
+        styleClass="custom-spinner" 
+        strokeWidth="3"
+        animationDuration="1s"
+      ></p-progressSpinner>
+      <p class="loading-text">Verificando credenciales...</p>
+    </div>
+  </div>
+</div>

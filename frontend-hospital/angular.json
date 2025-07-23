@@ -19,7 +19,7 @@
           "options": {
             "outputPath": "dist/frontend-hospital",
             "index": "src/index.html",
-            "browser": "src/main.ts",
+            "browser": "src/main.ts",             
             "polyfills": [
               "zone.js"
             ],
@@ -32,6 +32,7 @@
               }
             ],
             "styles": [
+
               "src/styles.scss"
             ],
             "scripts": []
@@ -62,9 +63,12 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "buildTarget": "frontend-hospital:build"
+          },
           "configurations": {
             "production": {
-              "buildTarget": "frontend-hospital:build:production"
+               "buildTarget": "frontend-hospital:build:production"
             },
             "development": {
               "buildTarget": "frontend-hospital:build:development"
@@ -91,10 +95,8 @@
               }
             ],
             "styles": [
-                  "node_modules/primeng/resources/themes/lara-light-blue/theme.min.css",
-                  "node_modules/primeng/resources/primeng.min.css",
-                  "node_modules/primeicons/primeicons.css",
-                  "src/styles.scss"
+            
+              "src/styles.scss"
             ],
             "scripts": []
           }

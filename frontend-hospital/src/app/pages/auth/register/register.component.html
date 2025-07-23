@@ -1,7 +1,9 @@
+<!-- src/app/pages/views/auth/register/register.component.html -->
 <div class="auth-container">
+  <p-toast position="top-right"></p-toast>
   <h2>Registro</h2>
 
-  <!-- Mostrar el formulario solo si aún no hay QR -->
+  <!-- ─── Paso 1: Formulario de registro ──────────────────── -->
   <div *ngIf="!otpauthUrl; else qrStep" class="p-fluid">
     <div class="p-field">
       <label for="nombre">Nombre</label>
@@ -23,13 +25,19 @@
       <label for="confirmPassword">Confirmar Contraseña</label>
       <input id="confirmPassword" type="password" pInputText [(ngModel)]="confirmPassword" />
     </div>
+
     <div class="button-container">
       <button
         pButton
         label="Registrar"
-        severity="info"
-        [rounded]="true"
-        [disabled]="!username || !email || !password || !confirmPassword"
+        icon="pi pi-user-plus"
+        [disabled]="
+          !username ||
+          !apellido ||
+          !email ||
+          !password ||
+          password !== confirmPassword
+        "
         (click)="onRegister()"
       ></button>
       <button
@@ -37,37 +45,41 @@
         label="Volver a Login"
         severity="info"
         [rounded]="true"
-        routerLink="/auth/login"
+        (click)="irAlLogin()"
       ></button>
     </div>
   </div>
 
-  <!-- Mostrar QR si ya fue generado -->
-    <ng-template #qrStep>
+  <!-- ─── Paso 2: QR + OTP ──────────────────────────────────── -->
+  <ng-template #qrStep>
     <div class="p-fluid">
       <h3>¡Bien! Escanea este QR con Google Authenticator:</h3>
-      <img
-       [src]="qrUrl"
-        alt="QR MFA"
-      />
+      <img [src]="qrUrl" alt="QR MFA" />
 
-      <p>O usa este enlace:</p>
-      <code>{{ otpauthUrl }}</code>
+      <p>O copia este enlace manualmente:</p>
+      <code class="otpauth">{{ otpauthUrl }}</code>
     </div>
 
-     <!-- Campo para ingresar OTP -->
     <div class="p-field">
       <label for="otp">Código OTP</label>
       <input id="otp" type="text" pInputText [(ngModel)]="otp" />
     </div>
 
-    <!-- Botón para activar MFA -->
-    <button
-      pButton
-      label="Activar MFA"
-      (click)="activarMFA()"
-      [disabled]="!otp"
-    ></button>
-
+    <div class="button-container">
+      <button
+        pButton
+        label="Activar MFA"
+        icon="pi pi-key"
+        [disabled]="!otp"
+        (click)="activateRecovery()"
+      ></button>
+      <button
+        pButton
+        label="Volver a Login"
+        severity="info"
+        [rounded]="true"
+        (click)="irAlLogin()"
+      ></button>
+    </div>
   </ng-template>
 </div>

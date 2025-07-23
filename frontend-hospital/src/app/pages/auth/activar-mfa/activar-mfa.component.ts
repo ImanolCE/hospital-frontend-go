@@ -3,6 +3,8 @@ import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+//
+import { share } from 'rxjs';
 
 @Component({
   selector: 'app-activar-mfa',

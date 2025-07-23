@@ -3,17 +3,17 @@ import { CommonModule } from '@angular/common';
 import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
 import { RouterModule } from '@angular/router';
-import { AuthService } from '../../../../services/auth.service';
+import { AuthService } from '../../../services/auth.service';
+//import { SharedModule } from '../../../shared.module'
 
 @Component({
-  selector: 'app-paciente-dashboard',
+  selector: 'app-enfermera-dashboard',
   standalone: true,
   imports: [CommonModule, CardModule, ButtonModule, RouterModule],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-
-export class DashboardPacienteComponent implements OnInit {
+export class DashboardEnfermeraComponent implements OnInit {
   permisos: string[] = [];
 
   constructor(private auth: AuthService) {}
@@ -22,3 +22,4 @@ export class DashboardPacienteComponent implements OnInit {
     this.permisos = this.auth.getPermisos();
   }
 }
+

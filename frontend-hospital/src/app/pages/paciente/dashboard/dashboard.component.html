@@ -1,0 +1,90 @@
+<div class="p-fluid p-m-3">
+  <!-- BOTONES SUPERIORES -->
+  <div class="p-buttons">
+    <button *ngIf="permisos.includes('ver_consultas')"
+            pButton label="Historial de Consultas" 
+            icon="pi pi-calendar" 
+            class="p-button-success" 
+            (click)="verConsultas()"></button>
+
+    <button *ngIf="permisos.includes('crear_consultas')"
+            pButton label="Solicitar Cita" 
+            icon="pi pi-plus-circle" 
+            class="p-button-warning" 
+            (click)="crearCita()"></button>
+
+    <button *ngIf="permisos.includes('ver_recetas')"
+            pButton label="Ver Recetas" 
+            icon="pi pi-file" 
+            class="p-button-info" 
+            (click)="verRecetas()"></button>
+  </div>
+
+  <!-- PANEL CONSULTAS -->
+  <p-panel header="Historial de Consultas" *ngIf="showConsultas" class="p-mt-3">
+    <p-table [value]="consultas" [paginator]="true" [rows]="5" class="p-datatable-sm">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Diagnóstico</th>
+          <th>Médico</th>
+          <th>Consultorio</th>
+          <th>Horario</th>
+          <th>Costo</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-cons>
+        <tr>
+          <td>{{cons.diagnostico}}</td>
+          <td>{{ cons.id_medico }}</td>
+          <td>{{ cons.id_consultorio }}</td>
+          <td>{{ cons.id_horario }}</td>
+          <td>{{ cons.costo | currency:'USD' }}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </p-panel>
+
+  <!-- PANEL CREAR CITA -->
+  <p-panel header="Solicitar Nueva Cita" *ngIf="permisos.includes('crear_consultas')" class="p-mt-3">
+    <div class="p-formgrid p-grid">
+      <div class="p-field p-col-12 p-md-6">
+        <label for="medico">ID Médico</label>
+        <input id="medico" type="number" pInputText [(ngModel)]="nuevaCita.id_medico"/>
+      </div>
+      <div class="p-field p-col-12 p-md-6">
+        <label for="consultorio">ID Consultorio</label>
+        <input id="consultorio" type="number" pInputText [(ngModel)]="nuevaCita.id_consultorio"/>
+      </div>
+      <div class="p-field p-col-12 p-md-6">
+        <label for="horario">ID Horario</label>
+        <input id="horario" type="number" pInputText [(ngModel)]="nuevaCita.id_horario"/>
+      </div>
+      <div class="p-col-12">
+        <button pButton label="Crear Cita" 
+                class="p-button-warning" 
+                (click)="crearCita()"></button>
+      </div>
+      <div class="p-col-12" *ngIf="resultadoCita">
+        <p-message severity="info" text="{{resultadoCita}}"></p-message>
+      </div>
+    </div>
+  </p-panel>
+
+  <!-- PANEL RECETAS -->
+  <p-panel header="Mis Recetas" *ngIf="showRecetas" class="p-mt-3">
+    <p-table [value]="recetas" alwaysShowPaginator="false">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Fecha</th><th>Medicamento</th><th>Dosis</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-r>
+        <tr>
+          <td>{{r.fecha}}</td>
+          <td>{{r.medicamento}}</td>
+          <td>{{r.dosis}}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </p-panel>
+</div>
